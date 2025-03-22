@@ -24,16 +24,37 @@
         justify-content: center;
         text-align: center;
     }
-
     .p1p.show {
         opacity: 1;  /* 显示时的透明度 */
         visibility: visible;  /* 显示时使其可见 */
         transition: opacity 0.5s ease, visibility 0s linear 0s; /* 渐显的过渡效果 */
     }
-
-    /* 弹窗内容的样式 */
     .p1p-content {
       padding: 10px;
+    }
+    .tips {
+      position: relative;
+      display: inline-block;
+    }
+    .tips-text {
+      visibility: hidden;
+      width: 200px;
+      background-color: #46464688;
+      color: #fff;
+      text-align: center;
+      padding: 3px;
+      border-radius: 6px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* 显示在按钮上方 */
+      left: 25%;
+      margin-left: -60px; /* 居中 */
+      opacity: 0;
+      transition: opacity 0.25s ease-in-out; /* 淡入效果 */
+    }
+    .tips:hover .tips-text {
+      visibility: visible;
+      opacity: 1;
     }
     #sidebar {
         width: 200px;
@@ -61,10 +82,31 @@
         margin-left: 200px;
         padding: 20px;
     }
+    #sidebar .submenu {
+            top: 0;
+            height: 50px;
+            width: 180px;
+            background: #333;
+            display: none;
+            border-radius: 0 6px 6px 0;
+            z-index: 1000;
+        }
+        #sidebar .has-submenu:hover .submenu,
+        #sidebar .has-submenu.active .submenu {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .has-submenu > a::after {
+            content: "▸";
+            float: right;
+            margin-left: 10px;
+        }
 
-    .page {
-        display: none;
-    }
+
     /* 侧边栏的菜单项高亮 */
     #sidebar a.active {
         background-color: #858585;
@@ -77,6 +119,9 @@
     .page.active {
         display: block;
         animation: fadeIn 0.5s ease-in;
+    }
+        .page {
+        display: none;
     }
     /* 添加过渡效果 */
     @keyframes fadeIn {
@@ -113,8 +158,7 @@
             top: 5px;
             right: 10px;
         }
-        .close:hover,
-        .close:focus {
+        .close:hover,.close:focus {
             color: black;
             text-decoration: none;
             cursor: pointer;
@@ -128,22 +172,22 @@
             border-radius: 4px;
         }
         body {
-            background: #3a2323;  /* 深蓝色背景 */
-            color: #ffffff;          /* 文字颜色 */
-            font: SimHei;    /* 字体 */
+            background: #3a2323;
+            color: #ffffff;
+            font: SimHei;
             font-weight: bold;
-            padding: 15px;         /* 内边距 */
+            padding: 15px;
         }
         /* 按钮基础样式 */
         button{
-            padding: 12px 12px;    /* 内边距 */
+            padding: 12px 12px;
             font: SimHei;
             font-weight: 800;
             background-color: #747474;
             border-bottom: #616161;
-            cursor: pointer;        /* 鼠标指针样式 */
+            cursor: pointer;
             font-size: 16px;
-            text-shadow: 0px 0px 8px rgb(255, 255, 255);
+            text-shadow: 0px 0px 8px #ffffff;
             color:#ffffff;
             border-width: 4px;
             border-radius: 5px;   
@@ -152,21 +196,30 @@
             font-size: 30px;
             text-shadow: 0px 0px 8px#ffffff;
         }
+        .achievements{
+            width: 150px;
+            height: 150px;
+            background-size: 100% 100%;
+            border: 3px;
+            border-color: #ffffff;
+            padding: 0px 0px;
+            cursor:default;
+        }
         .buttonbuy1 {
             border-color: #ca2d2d;
             background: #a03535;
-            width: 200px;
-            height: 80px;
-            padding: 6px 6px;    /* 内边距 */
-            cursor: pointer;        /* 鼠标指针样式 */
-            font-size: 16px;        /* 字号 */
+            width: 250px;
+            height: 100px;
+            padding: 6px 6px;
+            cursor: pointer;
+            font-size: 16px;
         }
         .buttonyellow {
             background: #6daa3b;
             border-color: #44940e;
         }
         .buttonred {
-            background: #ff5757;    /* 蓝色背景 */
+            background: #ff5757;
             border-color: #a80f0f;
 
         }
@@ -177,13 +230,13 @@
             width: 300px;
             height: 130px;
             padding: 6px 6px;
-            font-size: 20px;
+            font-size: 18px;
             margin-left: 30px;
         }
         .buttonbling {
-            width: 200px;
+            width: 250px;
             height: 120px;
-            background: #888888;    /* 蓝色背景 */
+            background: #888888;
             border-color: #000000;
             font-size: 18px;
             animation: colorChange 2s infinite
@@ -191,38 +244,61 @@
         .buttonupgrade {
             width: 250px;
             height: 150px;
-            padding: 6px 6px;    /* 内边距 */
-            background: #858585;    /* 蓝色背景 */
+            padding: 6px 6px;
+            background: #858585;
             border-color: #272727;
             overflow: hidden;
             border-width: 4px;
-            border-radius: 10px;     /* 圆角半径 */
-            cursor: pointer;        /* 鼠标指针样式 */
+            border-radius: 10px;
+            cursor: pointer;
             font-size: 12px;
         }
         .buttonchallenge{
             width: 300px;
             height: 150px;
-            padding: 6px 6px;    /* 内边距 */
-            background: #616161;    /* 蓝色背景 */
+            padding: 6px 6px;
+            background: #616161;
             border-color: #272727;
             overflow: hidden;
             border-width: 4px;
-            border-radius: 10px;     /* 圆角半径 */
-            cursor: pointer;        /* 鼠标指针样式 */
+            border-radius: 10px;
+            cursor: pointer;
             font-size: 12px;
         }
         .schoolgenerator{
-            width: 520px;
+            width: 1008px;
             height: 200px;
-            background-color: #5ee070;  /* 背景颜色 */
-            border: 4px #159144;  /* 边框颜色和宽度 */
-            border-radius: 10px;        /* 圆角 */
+            background-color: #5ee070;
+            border: 4px #159144;
+            border-radius: 10px;
             font-size: 40px;
-            cursor: default;        /* 禁用按钮的光标 */
-            margin-left: 275px;
-    }
-    @keyframes colorChange {
+            cursor: default;
+            margin-left: 32px;
+        }
+        .statics{
+            height: 60px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            border: none;
+            color: #000000;
+            text-shadow: 0px 0px 4px #0000006b;
+            font-size: 20px;
+            cursor: default;
+            padding: 2px 20px;
+        }
+        #progress-container {
+            width: 600px;
+            height: 40px;
+            background-color: #802c2c;
+            border: 5px solid #501616;
+        }
+        #progress-bar {
+            height: 40px;
+            width: 0%;
+            background-color: #c26060;
+            text-align: center;
+        }
+        @keyframes colorChange {
             0% {
                 background: black;
                 color: white;
@@ -269,17 +345,36 @@
 <body>
     <div id="sidebar">
         <ul>
-            <li id="homeworkpage"><a href="#" style="color: #ca2d2d;" data-page="homework+">作业-homework</a></li>
+            <li class="has-submenu" id="productingpage">生产界面
+                <ul class="submenu" id="homeworkpage">
+                    <li><a href="#" data-page="homework+" style="color: #ca2d2d;" >作业</a></li>
+                </ul>
+            </li>
             <br>
-            <li id="knowledgepage"><a href="#" style="color: #40c940;" data-page="knowledge+">知识-knowledge</a></li>
+            <li class="has-submenu" style="color: #40c940;" id="knowledgepage">知识
+                <ul class="submenu" id="kpupgradepage">
+                    <li><a href="#" style="color: #40c940;" data-page="knowledge+">知识升级</a></li>
+                </ul>
+                <ul class="submenu" id="schoolgeneratorpage">
+                    <li><a href="#" style="color: #40c940;" data-page="schoolgenerator+" id="schoolgeneratorpage">学校生成器</a></li>
+                </ul>
+            </li>
             <br>
             <li id="autobuypage"><a href="#" style="color: #7c7c7c;" data-page="autobuy+">自动机-automachine</a></li>
             <br>
-            <li id="challenge"><a href="#" style="color: #ebe852;" data-page="challenge+">考试-test</a></li>
+            <li class="has-submenu" style="color: #ebe852;" id="challenge">考试
+                <ul class="submenu" id="challenges1">
+                    <li><a href="#" style="color: #ca2d2d;" data-page="challenge+">普通考试</a></li>
+                </ul>
+            </li>
             <br>
-            <li><a href="#" data-page="madeby">作者</a></li>
+            <li><a href="#" style="color: #cc45c5;" data-page="Achievements+">成就</a></li>
+            <br>
+            <li><a href="#" data-page="statics">统计</a></li>
             <br>
             <li><a href="#" data-page="files">存档</a></li>
+            <br>
+            <li><a href="#" data-page="madeby">作者</a></li>
             <br>
             <li><a href="#" data-page="reporter">更新日志</a></li>
         </ul>
@@ -289,7 +384,8 @@
             <p class="inline-block m">你写完了 </p>
             <p class="inline-block b red" id="homework">0</p>
             <p class="inline-block m"> 本作业</p>
-            <button class="inline-block buttonred" id="help">帮助</button>
+            <button class="buttonbling inline-block" id="brainstorm">脑容量爆炸</button>
+            <button class="inline-block buttonred" id="help">新手必看</button>
             <br>
             <p class="inline-block s">每秒自动获得</p>
             <p class="inline-block m red" id="speed">0</p>
@@ -303,37 +399,42 @@
             <button class="inline-block buttonred" id="focus">集中精神</button>
             <p class="inline-block" id="focustime">剩余 1 ms可以生产</p>
             <br><br>
+            <button style="background-color:#91b413;border-color:#69810f" id="hm_buymax_button">购买全部 当前冷却 1 秒</button>
+            <br><br>
             <button id="dohomework" class="buttonbuy1">写作业<br>每次 1 本</button>
             <br><br>
-            <button class="buttonbuy1" id="buypen">购买签字笔 需要 10 本作业</button>
+            <button class="buttonbuy1 align-items: flex-start;" id="buypen">购买签字笔 需要 10 本作业</button>
             <p class="inline-block" id="textpen">当前签字笔 1 支</p>
             <p class="inline-block" id="multipen">当前乘数 x1</p>
-            <br>
+            <br><br>
             <button class="buttonbuy1" id="buymachine">购买写作业机 需要 100 本作业</button>
             <p class="inline-block" id="textmachine">当前写作业机 0 台</p>
             <p class="inline-block" id="multimachine">当前乘数 x1</p>
-            <br>
+            <br><br>
             <button class="buttonbuy1" id="buypencase">购买文具盒 需要 1e3 作业</button>
             <p class="inline-block" id="textpencase">当前文具盒 0 个</p>
             <p class="inline-block" id="multipencase">当前乘数 x1</p>
-            <br>
+            <br><br>
             <button class="buttonbuy1" id="buyboard">购买电子白板 需要 1e4 作业</button>
             <p class="inline-block" id="textboard">当前电子白板 0 个</p>
             <p class="inline-block" id="multiboard">当前乘数 x1</p>
-            <br>
+            <br><br>
             <button class="buttonbuy1" id="buyclass">购买班级 需要 1e5 作业</button>
             <p class="inline-block" id="textclass">当前班级 0 个</p>
             <p class="inline-block" id="multiclass">当前乘数 x1</p>
-            <br>
+            <br><br>
             <button class="buttonbuy1" id="buyschool">购买学校 需要 1e6 作业</button>
             <p class="inline-block" id="textschool">当前学校 0 个</p>
             <p class="inline-block" id="multischool">当前乘数 x1</p>
-            <br>
+            <br><br>
             <button class="buttonyellow buttonbuy1" id="handinhomework">交作业 需要 100 本作业</button>
             <p class="inline-block" id="texthandin">将会解锁 写作业机</p>
             <p class="inline-block" id="textmultihandin">目前提供 x1 乘数</p>
             <br><br>
-            <button class="buttonbling" id="brainstorm">脑容量爆炸</button>
+            <div id="progress-container">
+                <div id="progress-bar"></div>
+            <p class="red" id="progress"></p>
+            </div>
         </div>
         <div id="knowledge+" class="page">
             <p class="inline-block m">你拥有 </p>
@@ -345,36 +446,35 @@
             <p class="inline-block s" id="kp+r"> 点知识</p>
             <br>
             <button class="buttonupgrade inline-block" id="upgrade1">升级1"肌肉记忆"<br>1KP<br>购买项目5次获得的乘数由2变为3</button>
-            <button class="buttonupgrade inline-block" id="upgrade2">升级2"抄作业"<br>1KP<br>每次以100作业开始</button>
+            <button class="buttonupgrade inline-block" id="upgrade2">升级2"抄作业"<br>1KP<br>每次以990作业开始</button>
             <button class="buttonupgrade inline-block" id="upgrade3">升级3"错题本"<br>1KP<br>所有项目获得基于KP的无上限乘数</button>
-            <button class="buttonupgrade inline-block" id="upgrade4">升级4"求情"<br>2KP<br>使学校解锁前交作业增长变为1e4</button>
+            <button class="buttonupgrade inline-block" id="upgrade4">升级4"求情"<br>2KP<br>使学校解锁前交作业增长变为1e8</button>
             <br><br>
             <button class="buttonupgrade inline-block" id="upgrade5">升级5"肌肉记忆2.0"<br>3KP<br>再让购买项目5次获得的乘数+1</button>
             <button class="buttonupgrade inline-block" id="upgrade6">升级6"贿赂课代表"<br>5KP<br>以5次交作业开始</button>
             <button class="buttonupgrade inline-block" id="upgrade7">升级7"错题本2.0"<br>8KP<br>获得双倍KP</button>
-            <button class="buttonupgrade inline-block" id="upgrade8">升级8"写检讨"<br>10KP<br>使学校解锁后交作业增长变为1e7</button>
+            <button class="buttonupgrade inline-block" id="upgrade8">升级8"写检讨"<br>10KP<br>使学校解锁后交作业增长变为1e16</button>
             <br><br>
             <button class="buttonupgrade inline-block" id="upgrade9">升级9"加倍努力"<br>15KP<br>交作业提供的乘数变为x20</button>
             <button class="buttonupgrade inline-block" id="upgrade10">升级10"同桌互批"<br>20KP<br>基于你拥有的KP，每秒生产1/1000</button>
-            <button class="buttonupgrade inline-block" id="upgrade11">升级11"补豪!"<br>3KP<br>提供1e5乘数(福利了属于是)</button>
-            <button class="buttonupgrade inline-block" id="upgrade12">升级12"狂草糊弄学"<br>1e10KP<br>优化你获得KP的公式</button>
-            <br>
-            <p class="line">—————————————————————————————————</p>
-            <br>
-            <button class="schoolgenerator" disabled>学校生成器(未更新功能)</button>
+            <button class="buttonupgrade inline-block" id="upgrade11">升级11"来点甜头"<br>3KP<br>提供x1000的乘数</button>
+            <button class="buttonupgrade inline-block" id="upgrade12">升级12"狂草糊弄学"<br>1e50KP<br>优化你获得KP的公式</button>
+        </div>
+        <div id="schoolgenerator+" class="page">
+            <button class="schoolgenerator">学校生成器(未更新功能)</button>
             <br><br><br><br>
-            <button class="buttonbuy2 inline-block" id="generatorup1">升级学校生成器的产量<br>当前 1个/次<br>1KP</button>
+            <button class="buttonbuy2 inline-block" id="generatorup1">升级学校生成器的产量<br>当前 0.1个/次<br>1KP</button>
             <button class="buttonbuy2 inline-block" id="generatorup2">生产学校生成器的速度<br>当前间隔 10s<br>100KP</button>
-            <button class="buttonbuy2 inline-block" id="generatorup3">升级学校生成器的乘数<br>当前 x1<br>1e5KP</button>
+            <button class="buttonbuy2 inline-block" id="generatorup3">升级学校生成器的乘数<br>当前 x1<br>1000学校</button>
         </div>
         <div id="autobuy+" class="page">
             <p class="b" style="color: #747474;text-shadow:0px 0px 10px #747474;">自动机控制</p>
             <p class="s" style="color: #747474;text-shadow:0px 0px 10px #747474;">在挑战9完成前，可能出现由于速度太快会出现判断不到1.78e308的情况，暂时无法解决，可以尝试关闭几个高阶项目的自动机</p>
             <p class="inline-block m" id="auto1">签字笔自动机</p>
-            <button id="switch1">  OFF  </button>
+            <button class="inline-block" id="switch1">  OFF  </button>
             <br>
             <p class="inline-block m" id="auto2">写作业机自动机</p>
-            <button id="switch2">  OFF  </button>
+            <button class="inline-block" id="switch2">  OFF  </button>
             <br>
             <p class="inline-block m" id="auto3">文具盒自动机</p>
             <button class="inline-block" id="switch3">  OFF  </button>
@@ -393,7 +493,7 @@
             <br>
             <p class="inline-block m" id="auto8">脑容量爆炸自动机</p>
             <button class="inline-block" id="switch8">  OFF  </button>
-            <input class="inline-block" style="height: 40px; width:600px;" id="braindownlimit" placeholder="可获得的KP>=此值则脑容量爆炸，请按照'[a,b]'的格式输入(如1e308则输入[1,308]，要带方框号)"></input>
+            <input class="inline-block" style="height: 40px; width:600px;" id="braindownlimit" placeholder="可获得的KP超过此值则脑容量爆炸，请输入科学计数法(aeb)或是普通数值"></input>
             <br>
         </div>
         <div id="challenge+" class="page">
@@ -403,20 +503,89 @@
             <button class="buttonchallenge inline-block" id="challenge3">挑战3 请了个假<br>学校不生产任何东西<br>解锁文具盒自动机</button>
             <button class="buttonchallenge inline-block" id="challenge4">挑战4 昨晚没睡<br>不进行生产，按下"集中精神"后一秒内正常生产<br>解锁电子白板自动机</button>
             <br><br><br><br><br>
-            <button class="buttonchallenge inline-block" id="challenge5">挑战5 磨磨蹭蹭<br>全部生产速度^0.5<br>解锁班级自动机</button>
-            <button class="buttonchallenge inline-block" id="challenge6">挑战6 作业翻倍<br>每过1s全部项目价格跳到下一阶段，交作业后重置<br>解锁学校自动机</button>
+            <button class="buttonchallenge inline-block" id="challenge5">挑战5 磨磨蹭蹭<br>全部生产速度^0.75<br>解锁班级自动机</button>
+            <button class="buttonchallenge inline-block" id="challenge6">挑战6 作业翻倍<br>每过1s全部项目价格x2，交作业后重置<br>解锁学校自动机</button>
             <button class="buttonchallenge inline-block" id="challenge7">挑战7 没带作业<br>每1秒都会清空除了学校以外的全部项目<br>解锁可升级的交作业自动机</button>
             <button class="buttonchallenge inline-block" id="challenge8">挑战8 头脑风暴<br>脑容量爆炸需求变为1e600<br>解锁脑容量爆炸自动机</button>
             <br><br><br><br><br>
-            <button class="buttonchallenge inline-block" style="margin-left: 480px;" id="challenge9">挑战9 突破极限<br>在30s内达到脑容量爆炸<br>解锁突破大脑极限，项目价格增加</button>
+            <button class="buttonchallenge inline-block" style="margin-left: 480px;" id="challenge9">挑战9 突破极限<br>在1s内达到脑容量爆炸<br>解锁突破大脑极限，项目价格增加</button>
+        </div>
+        <div id="Achievements+" class="page">
+            <p style="color: #cc45c5;text-shadow:0px 0px 10px #cc45c5;" class="b">成就</p>
+            <p style="color: #cc45c5;text-shadow:0px 0px 10px #cc45c5;" class="s">没什么用，但是可以拿来炫耀啊</p>
+            <br><br>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac0.png);" id="ac1">
+                <scan class="tips-text">万物起源<br>进行第一次写作业</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac1.png);" id="ac2">
+                <scan class="tips-text">从头再来<br>进行第一次交作业</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac2.png);" id="ac3">
+                <scan class="tips-text">"最后一个"?<br>解锁项目"学校"</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac3.png);" id="ac4">
+                <scan class="tips-text">这么多?借我一支<br>拥有超过1e50支签字笔</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac4.png);" id="ac5">
+                <scan class="tips-text">住校生<br>拥有超过150个学校</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac5.png);" id="ac6">
+                <scan class="tips-text">比土豆更快<br>每秒获得至少1e29本作业</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac6.png);" id="ac7">
+                <scan class="tips-text">手不疼吗??<br>进行了超过5000次点击</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac7.png);" id="ac8">
+                <scan class="tips-text">真的不疼吗??<br>进行了超过100000次点击</scan>
+            </button>
+            <br><br>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac8.png);" id="ac9">
+                <scan class="tips-text">我去,炸我一脸<br>进行脑容量爆炸</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac9.png);" id="ac10">
+                <scan class="tips-text">课代表无语了<br>进行了超过100次交作业</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac10.png);" id="ac11">
+                <scan class="tips-text">获得提升<br>购买任意一个知识升级</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac11.png);" id="ac12">
+                <scan class="tips-text">蘸豆,爽!<br>通过任意一挑战，获得自动机</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac12.png);" id="ac13">
+                <scan class="tips-text">学习<br>拥有20点KP</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac13.png);" id="ac14">
+                <scan class="tips-text">superman<br>解锁全部12个升级</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac14.png);" id="ac15">
+                <scan class="tips-text">头顶怎么尖尖的<br>突破大脑极限</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac15.png);" id="ac16">
+                <scan class="tips-text">比土豆^20更快<br>每秒获得至少1e580本作业</scan>
+            </button>
+            <br><br>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac16.png);" id="ac17">
+                <scan class="tips-text">装(  )让你飞起来<br>基于kp的乘数超过200</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac17.png);" id="ac18">
+                <scan class="tips-text">废寝忘食<br>游玩时间超过5小时(讲真，有这么好玩吗?)</scan>
+            </button>
+        </div>
+        <div id="statics" class="page">
+            <p class="b" style="color: #747474;text-shadow:0px 0px 10px #747474;">统计页面</p>
+            <button class="statics" id="timesofhandin">总共进行过 0 次交作业</button>
+            <br><br>
+            <button class="statics" id="timesofstorm">总共进行过 0 次脑容量爆炸</button>
+            <br><br>
+            <button class="statics" id="timesofclick">总共点击过 0 次按钮</button>
+            <br><br>
+            <button class="statics" id="timeofplay">总共游玩了 0 天 0 小时 0 分钟 0 秒</button>
         </div>
         <div id="madeby" class="page">
             <p>主作者</p>
             <p>超屑的屑屑花生</p>
             <a href="https://space.bilibili.com/644171036" class="yellow">点击这里跳转至BiliBili</a>
             <p>QQ 3168219272</p>
-            <br>
-            <p>特别鸣谢(跳转主页时会导致此页面关闭，请提前存档或是复制页面!)：</p>
             <br>
             <p>普雷尔</p>
             <a href="https://space.bilibili.com/1581274681" class="yellow">点击这里跳转至BiliBili</a>
@@ -432,8 +601,14 @@
             <br>
         </div>
         <div id="files" class="page">
-            <button class="buttonred" id="save">保存存档</button>
-            <button class="buttonred" id="load">获取存档</button>
+            <button class="buttonred" id="autosave">保存</button>
+            <button class="buttonred" id="autoload">加载</button>
+            <p>每60s自动保存一次到本地</p>
+            <button class="buttonred" id="save">导出存档</button>
+            <button class="buttonred" id="load">导入存档</button>
+            <br><br>
+            <button class="buttonred" id="HARD_RESET">完全重置</button>
+            <br>
             <button class="buttonred" id="loadin">读取</button>
             <br>
             <input type="text" id="inputField" placeholder="请输入存档">
@@ -443,30 +618,42 @@
             更新日志
 
             1.01日志-2025.3.1<br>
-            制作出第一版游戏，制作了作业部分达到1.78e308软上限的内容<br>
-            移除了wanjia114<br>
+            制作出第一版游戏<br>
+            添加了wanjia114<br>
             <br><br>
             1.02日志-2025.3.2<br>
-            增加了更多的简易交互动画，新增加了作业1.78e308软上限后的内容<br>
-            1.知识点获取<br>
-            2.共计12个知识升级<br>
-            3.制作了自动购买器和考试的页面，但还没有制作相关内容<br>
+            增加了更多的简易交互动画<br>
+            增加了新的层级知识(部分)<br>
+            ┠──知识点获取<br>
+            ┗──共计12个知识升级<br>
+            共计12个知识升级<br>
+            制作了自动购买器和考试的页面，但还没有制作相关内容<br>
             修复了已知的bug<br>
             更新了存档存储读取功能<br>
             移除了wanjia114<br>
             <br><br>
-            1.03日志-<br>
-            修复了第6次交作业显示bug<br>
-            加入了新的内容：<br>
-            自动机<br>
-            9个挑战<br>
-            打破大脑极限<br>
-            优化页面内容，加入一些特效<br>
-            加入了更多小提示<br>
+            1.03日志-2025.3.9<br>
+            加入了新的内容<br>
+            ┠──自动机<br>
+            ┠──9个挑战<br>
+            ┠──打破大脑极限(部分内容)<br>
+            ┗──半成品的成就<br>
+            修复了已知的bug，如升级6显示问题<br>
+            优化页面内容，加入了些漂亮的特效<br>
+            移除了wanjia114<br>
+            <br><br>
+            1.04日志-2025.未完<br>
+            添加了本地存储，也许再也不需要用调base64改存档了<br>
+            修复了已知的bug，比如升级11没有效果<br>
+            我们决定向专业低头(删除了自制大数库，改用了break_eternity.js)<br>
+            制作了购买全部(buymax)功能<br>
+            加入学校生成器的功能<br>
+            加入统计面板<br>
+            做了很多(准确来说，是xx个)成就!<br>
             移除了wanjia114<br>
     </div>
-        <p id="progress">距离 脑容量爆炸 还有 308 指数</p>
-        <p>版本号1.03</p>
+        <br><br>
+        <p>版本号1.03<br>使用了break_eternity.js</p>
     <!-- 显示区域 -->
     
     <div id="helpwindow" class="popup">
@@ -474,18 +661,8 @@
             <span id="closeButton" class="close">&times;</span>
             <h2>欢迎来到作业增量！(作者：超屑的屑屑花生)</h2>
             <p>这里是一些很基础的东西的介绍，你可以看一看熟悉游戏(关闭键右上角)，本游戏借鉴了《反物质维度》(特别好玩的游戏)</p>
-            <p>获得作业</p>
-            <p>你可以通过手动点击"写作业"获取作业，或是让自动写作业机来进行"写作业"行为</p>
-            <p>生产项目</p>
-            <p>数量：没什么好说的，就是项目的个数而已，每次购买数量+1</p>
-            <p>乘数：一种属性，表示项目效果强化的倍数，一般每购买5次乘数增加</p>
-            <p>价格：购买项目需要的作业数量，一般每购买10次价格进入下一阶段</p>
-            <p>签字笔：每次写作业获得的作业量取决于于签字笔</p>
-            <p>写作业机：基于签字笔数量自动生产作业</p>
-            <p>文具盒：自动生产签字笔</p>
-            <p>电子白板：自动生产写作业机</p>
-            <p>班级：自动生产文具盒和电子白板</p>
-            <p>学校：自动生产班级</p>
+            <p>游戏内容还是挺多的，可不要半途而废，已经没有后续内容(一般是没做完)的时候我会提醒你的!</p>
+            <p>感谢你，亲爱的玩家!</p>
         </div>
     </div>
     <div id="tips" class="p1p">
@@ -493,9 +670,8 @@
           <p></p>
         </div>
       </div>
-    
-      <script src="script.js"></script>
     <!-- 引入 JavaScript 文件 -->
-    <script src="gamecode.js"></script>
+    <script type="text/javascript" src="break_eternity.js"></script>
+    <script type="text/javascript" src="gamecode.js"></script>
 </body>
 </html>
