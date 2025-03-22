@@ -566,6 +566,7 @@ document.getElementById("focus").addEventListener("click", function(){
 })
 document.addEventListener('keydown', function(event) {
     if(event.key === ' '){
+        challenge[8] = 0
     }  
 })
 document.addEventListener('click', function() {
