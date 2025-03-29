@@ -228,26 +228,22 @@ function hm_buysingle(i){
     }
     if (thing[i][0].mod(10).eq(Zero) && thing[i][0].gte(dec("10"))) {
         if (unlock[1] === 1 && thing[i][0].gte(dec("300"))){
-            thing[i][1] = thing[i][1].mul(dec("10").pow(dec(i+5).mul(dec("5"))))
+            thing[i][1] = thing[i][1].mul(dec("10").pow(dec(i+5).mul(dec("2"))))
         }else{
             thing[i][1] = thing[i][1].mul(dec("10").pow(dec(i+1).mul(dec("2"))))
         }
     }
 }
-function hm_buymax(i){
-    if (dec("10").sub(thing[i][0].mod(10)).gte(5)){
-        thing[i][3] = thing[i][3].mul(dec(2+upgrade[0]+upgrade[4]).pow(2))
-    }else{
-        thing[i][3] = thing[i][3].mul(dec(2+upgrade[0]+upgrade[4]))
-    }
+function hm_buyten(i){
+    thing[i][3] = thing[i][3].mul(dec(2+upgrade[0]+upgrade[4]).pow(2))
+    product[0] = product[0].sub(thing[i][1].mul(dec("10")))
     if (unlock[1] === 1 && thing[i][0].gte(dec("300"))){
         thing[i][1] = thing[i][1].mul(dec("10").pow(dec(i+5).mul(dec("5"))))
     }else{
         thing[i][1] = thing[i][1].mul(dec("10").pow(dec(i+1).mul(dec("2"))))
     }
-    thing[i][2] = thing[i][2].add(dec("10").sub(thing[i][0].mod(10)))
-    product[0] = product[0].sub(thing[i][2].mul(dec("10").sub(thing[i][0].mod(10))))
-    thing[i][0] = thing[i][0].add(dec("10").sub(thing[i][0].mod(10)))
+    thing[i][2] = thing[i][2].add(dec("10"))
+    thing[i][0] = thing[i][0].add(dec("10"))
 }
 function handin(){
     statics[0] = statics[0].add(dec("1"))
@@ -392,7 +388,7 @@ let generator = [
         [Zero,dec("1"),Zero],//学校生产
         [Zero,dec("10"),dec("10000")],//生产间隔
         [Zero,dec("1e5"),dec("1")],//乘数
-        dec("10000")//技术间隔
+        dec("10000")//计数间隔
     ]
 ]//次数，价格，产量
 //窗口——————————————————————————————————————————————————————————————————————————————————
@@ -425,8 +421,7 @@ setInterval(function(){
                 brainstorm.style.animationPlayState = 'paused'
                 brainstorm.disabled = true
             }
-        }
-    
+        }    
 },0)
 setInterval(function(){
     if (autobuyer[7][0]===1 && autobuyer[7][1]===1){
@@ -449,13 +444,13 @@ setInterval(function(){
     if (autobuyer[6][0]===1 && autobuyer[6][1]===1 && product[0].gte(reset[0][1])){
             handin()
     }
-},10)
+},1)
 for (let i=5;i>=0;i--){
     setInterval(function(){
         if (inchallenge !== 1 || i !== 0){
             if (autobuyer[i][0]===1 && autobuyer[i][1]===1 && reset[0][0].gte(dec(i))){
-                if (product[0].gte(thing[i][1].mul(dec("10").sub(thing[i][0].mod(10)))) && false){
-                    hm_buymax(i)
+                if (product[0].gte(thing[i][1].mul(dec("10"))) && thing[i][0].mod(10).eq(Zero) && false){
+                    hm_buyten(i)
                 }else if(product[0].gte(thing[i][1])){
                     hm_buysingle(i)
                 }
@@ -471,7 +466,7 @@ for (let i=0;i<=7;i++){
     }else{
         autobuyer[i][1] = 1
     }
-})
+},1)
 //设置上限
 braindownlimit.addEventListener('blur', function() {
     wait = 1
@@ -577,8 +572,8 @@ buymaxbutton.addEventListener("click", function(){
     for (i=5;i>=0;i--){
         if (inchallenge !== 1 || i !==0){
             while (product[0].gte(thing[i][1]) && reset[0][0].gte(dec(i))){
-                if (product[0].gte(thing[i][1].mul(dec("10").sub(thing[i][0].mod(10))))){
-                    hm_buymax(i)
+                if (product[0].gte(thing[i][1].mul(dec("10"))) && (thing[i][0].mod(10)).eq(Zero)){
+                    hm_buyten(i)
                 }else{
                     hm_buysingle(i)
                 }
@@ -668,7 +663,7 @@ setInterval(function() {//生产
         generator[0][3] = generator[0][3].sub(dec("50"))
     }else{
     thing[5][2] = thing[5][2].add(generator[0][0][2])
-    thing[5][3] = thing[5][3].mul(generator[0][1][2])
+    thing[5][3] = thing[5][3].mul(generator[0][2][2])
         generator[0][3] = generator[0][1][2]
     }
 },50)
