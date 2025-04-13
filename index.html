@@ -15,7 +15,7 @@
         font-weight: 8px;
         text-shadow: 0px 0px 8px #ffffff;
         border-radius: 10px;
-        padding: 20px;
+        padding: 40px;
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.5s ease, visibility 0s linear 0.5s; /* 渐显和渐隐的过渡效果 */
@@ -31,6 +31,28 @@
     }
     .p1p-content {
       padding: 10px;
+    }
+    .news {
+        position:fixed;
+        top: 70%;
+        left: 0px;
+        width: 100%;
+        height: 70px;
+        background-color: #ffe819;
+        color: #000000;
+        font-size: 20px;
+        font-weight: 8px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease, visibility 0s linear 0.5s; /* 渐显和渐隐的过渡效果 */
+        z-index: 1000;  /* 确保弹窗在最上层 */
+        justify-content: center;
+        text-align: center;
+    }
+    .news.show {
+        opacity: 1;  /* 显示时的透明度 */
+        visibility: visible;  /* 显示时使其可见 */
+        transition: opacity 0.5s ease, visibility 0s linear 0s; /* 渐显的过渡效果 */
     }
     .tips {
       position: relative;
@@ -223,15 +245,48 @@
             border-color: #a80f0f;
 
         }
+        .abswitch {
+            border-width: 5px;
+            border-style: solid;
+            width: 80px;
+            height: 50px;
+            padding: 0px 0px;
+            font-size: 20px;
+            left: 550px;
+            position: absolute;
+        }
         .buttonbuy2 {
             border-color: #159144;
             border-width: 5px;
             background: #5ee070;
-            width: 300px;
+            width: 350px;
             height: 130px;
             padding: 6px 6px;
             font-size: 18px;
             margin-left: 30px;
+        }
+        .buttonbuy3 {
+            border-color: #eb9737;
+            border-radius: 0px;
+            border-style:solid;
+            width: 400px;
+            height: 100px;
+            padding: 6px 6px;
+            text-shadow: 
+    4px 0 #000000, 
+    -4px 0 #000000,
+    0 2px 10px #000000;
+            font-size: 18px;
+            margin-left: 0px;
+        }
+        .buttonMind {
+            width: 400px;
+            height: 150px;
+            background: #3f2105;
+            border-color: #b44f0b;
+            border-style:double;
+            border-width: 5px;
+            font-size: 18px;
         }
         .buttonbling {
             width: 250px;
@@ -244,14 +299,23 @@
         .buttonupgrade {
             width: 250px;
             height: 150px;
-            padding: 6px 6px;
             background: #858585;
             border-color: #272727;
-            overflow: hidden;
             border-width: 4px;
             border-radius: 10px;
             cursor: pointer;
             font-size: 12px;
+        }
+        .buttonmindupgrade {
+            width: 300px;
+            height: 200px;
+            background: #272727;
+            border-color: #858585;
+            border-width: 6px;
+            border-radius: 0px;
+            border-style:double;
+            cursor: pointer;
+            font-size: 15px;
         }
         .buttonchallenge{
             width: 300px;
@@ -266,7 +330,7 @@
             font-size: 12px;
         }
         .schoolgenerator{
-            width: 1008px;
+            width: 1020px;
             height: 200px;
             background-color: #5ee070;
             border: 4px #159144;
@@ -286,17 +350,26 @@
             cursor: default;
             padding: 2px 20px;
         }
-        #progress-container {
+        .progress-container {
             width: 600px;
             height: 40px;
             background-color: #802c2c;
             border: 5px solid #501616;
         }
-        #progress-bar {
+        .progress-bar {
             height: 40px;
             width: 0%;
             background-color: #c26060;
             text-align: center;
+        }
+        .downbar {
+            height: 30px;
+            font-size: 15px;
+            width: 100%;
+            background-color: #3f3f3f;
+            position: fixed;
+            bottom: 0%;
+            left: 0%;
         }
         @keyframes colorChange {
             0% {
@@ -314,11 +387,11 @@
         }
         .m {/*中字符*/
             font-size: 30px;
-            line-height: 3px;
+            line-height: 0px;
         }
         .s {/*小字符*/
             font-size: 15px;
-            line-height: 0px;
+            line-height: 18px;
         }
         .b {/*大字符*/
             font-size: 60px;
@@ -327,13 +400,18 @@
         .red {
             color: #ca2d2d;
             text-shadow:0px 0px 8px #ca2d2d;
-            
         }
         .yellow {
             color: #bde726;
+            text-shadow:0px 0px 8px #bde726;
         }
         .lightgreen {
             color: #40c940;
+            text-shadow:0px 0px 8px #40c940;
+        }
+        .orange {
+            color: #ca812d;
+            text-shadow:0px 0px 8px #ca812d;
         }
         .inline-block {
             display: inline-block;
@@ -346,25 +424,37 @@
     <div id="sidebar">
         <ul>
             <li class="has-submenu" id="productingpage">生产界面
+                <br><br>
                 <ul class="submenu" id="homeworkpage">
-                    <li><a href="#" data-page="homework+" style="color: #ca2d2d;" >作业</a></li>
+                    <li><a href="#" data-page="homework+" style="color: #ca2d2d;" >▶ homework-作业</a></li>
+                </ul>
+                <ul class="submenu" id="celestiapage">
+                    <li><a href="#" data-page="celestia+" style="color: #ca812d;" >▶ celestia-天体</a></li>
                 </ul>
             </li>
             <br>
-            <li class="has-submenu" style="color: #40c940;" id="knowledgepage">知识
+            <li class="has-submenu" style="color: #40c940;" id="knowledgepage">knowledge-知识
+                <br><br>
                 <ul class="submenu" id="kpupgradepage">
-                    <li><a href="#" style="color: #40c940;" data-page="knowledge+">知识升级</a></li>
+                    <li><a href="#" style="color: #40c940;" data-page="knowledge+">▶ 知识升级</a></li>
                 </ul>
-                <ul class="submenu" id="schoolgeneratorpage">
-                    <li><a href="#" style="color: #40c940;" data-page="schoolgenerator+" id="schoolgeneratorpage">学校生成器</a></li>
+                <ul class="submenu" id="breakbrainpage">
+                    <li><a href="#" style="color: #40c940;" data-page="breakbrain+" id="breakbrainpage">▶ 突破大脑极限</a></li>
+                </ul>
+                <ul class="submenu" id="mindupgradepage">
+                    <li><a href="#" style="color: #ca812d;" data-page="mindupgrade+">▶ 思维升级</a></li>
                 </ul>
             </li>
             <br>
-            <li id="autobuypage"><a href="#" style="color: #7c7c7c;" data-page="autobuy+">自动机-automachine</a></li>
+            <li id="autobuypage"><a href="#" style="color: #7c7c7c;" data-page="autobuy+">automachine-自动机</a></li>
             <br>
             <li class="has-submenu" style="color: #ebe852;" id="challenge">考试
+                <br><br>
                 <ul class="submenu" id="challenges1">
-                    <li><a href="#" style="color: #ca2d2d;" data-page="challenge+">普通考试</a></li>
+                    <li><a href="#" style="color: #ca2d2d;" data-page="challenge+">▶ 普通考试</a></li>
+                </ul>
+                <ul class="submenu" id="challenges2">
+                    <li><a href="#" style="color: #ca812d;" data-page="challenge2+">▶ 思维考试</a></li>
                 </ul>
             </li>
             <br>
@@ -385,7 +475,7 @@
             <p class="inline-block b red" id="homework">0</p>
             <p class="inline-block m"> 本作业</p>
             <button class="buttonbling inline-block" id="brainstorm">脑容量爆炸</button>
-            <button class="inline-block buttonred" id="help">新手必看</button>
+            <button class="inline-block buttonred" id="help">新手必看(含快捷键介绍)</button>
             <br>
             <p class="inline-block s">每秒自动获得</p>
             <p class="inline-block m red" id="speed">0</p>
@@ -431,10 +521,57 @@
             <p class="inline-block" id="texthandin">将会解锁 写作业机</p>
             <p class="inline-block" id="textmultihandin">目前提供 x1 乘数</p>
             <br><br>
-            <div id="progress-container">
-                <div id="progress-bar"></div>
+            <div class="progress-container" id="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
             <p class="red" id="progress"></p>
             </div>
+        </div>
+        <div id="celestia+" class="page">
+            <p class="inline-block m">你拥有 </p>
+            <p class="inline-block b orange" id="mindpoint">0</p>
+            <p class="inline-block m">点思维</p>
+            <button class="inline-block buttonMind orange" id="MindOver">思维过载</button>
+            <br>
+            <p class="inline-block s">提供了</p>
+            <p class="inline-block m orange" id="MulofCelestia">1</p>
+            <p class="inline-block s">乘数给作业阶段</p>
+            <p class="inline-block s">      每秒获得</p>
+            <p class="inline-block m orange" id="MulgetCelestia">1</p>
+            <p class="inline-block s">乘数</p>
+            <br><br>
+            <button style="background-image: url(images/Celestia_tiers/planet_tier1.png); background-size: 100% 100%;" class="buttonbuy3" id="celestiaBuy1">控制行星<br>1 思维</button>
+            <p class="inline-block" id="celestiaNum1">控制了 1 个行星</p>
+            <p class="inline-block" id="celestiaMul1">行星乘数 x1</p>
+            <br><br>
+            <button style="background-image: url(images/Celestia_tiers/stellar_tier.png); background-size: 100% 100%;" class="buttonbuy3" id="celestiaBuy2">控制恒星<br>1 思维</button>
+            <p class="inline-block" id="celestiaNum2">控制了 1 个恒星</p>
+            <p class="inline-block" id="celestiaMul2">恒星乘数 x1</p>
+            <br><br>
+            <button style="background-image: url(images/Celestia_tiers/nebula_tier.png); background-size: 100% 100%;" class="buttonbuy3" id="celestiaBuy3">控制星云<br>1 思维</button>
+            <p class="inline-block" id="celestiaNum3">控制了 1 个星云</p>
+            <p class="inline-block" id="celestiaMul3">星云乘数 x1</p>
+            <br><br>
+            <button style="background-image: url(images/Celestia_tiers/galaxy_tier.png); background-size: 100% 100%;" class="buttonbuy3" id="celestiaBuy4">控制星系<br>1 思维</button>
+            <p class="inline-block" id="celestiaNum4">控制了 1 个星系</p>
+            <p class="inline-block" id="celestiaMul4">星系乘数 x1</p>
+            <br><br>
+            <button style="background-image: url(images/Celestia_tiers/supercluster_tier.png); background-size: 100% 100%;" class="buttonbuy3" id="celestiaBuy5">控制超星系团<br>1 思维</button>
+            <p class="inline-block" id="celestiaNum5">控制了 1 个超星系团</p>
+            <p class="inline-block" id="celestiaMul5">超星系团乘数 x1</p>
+            <br><br>
+            <p class="inline-block s">超新星 增强了全部天体</p>
+            <p class="inline-block m orange" id="supercluster+">1</p>
+            <p class="inline-block s">倍</p>
+            <br>
+            <button style="background-image: url(images/Celestia_tiers/supernova_tier.png); background-size: 100% 100%;" class="buttonbuy3" id="celestiaBuy6">控制超新星<br>1 思维</button>
+            <p class="inline-block" id="celestiaNum6">控制了 1 个超新星</p>
+            <p class="inline-block" id="celestiaMul6">超新星乘数 x1</p>
+            <br><br>
+            <p class="inline-block s">中子星 增强超新星的增益为</p>
+            <p class="inline-block m orange" id="neutron_star+">^1</p>
+            <br>
+            <button style="background-image: url(images/Celestia_tiers/neutron_star_tier.png); background-size: 100% 100%;" class="buttonbuy3" id="celestiaBuy7">控制中子星<br>1 思维</button>
+            <p class="inline-block" id="celestiaNum7">控制了 1 个中子星</p>
         </div>
         <div id="knowledge+" class="page">
             <p class="inline-block m">你拥有 </p>
@@ -445,59 +582,126 @@
             <p class="inline-block m lightgreen" id="kp+">0</p>
             <p class="inline-block s" id="kp+r"> 点知识</p>
             <br>
-            <button class="buttonupgrade inline-block" id="upgrade1">升级1"肌肉记忆"<br>1KP<br>购买项目5次获得的乘数由2变为3</button>
-            <button class="buttonupgrade inline-block" id="upgrade2">升级2"抄作业"<br>1KP<br>每次以990作业开始</button>
-            <button class="buttonupgrade inline-block" id="upgrade3">升级3"错题本"<br>1KP<br>所有项目获得基于KP的无上限乘数</button>
-            <button class="buttonupgrade inline-block" id="upgrade4">升级4"求情"<br>2KP<br>使学校解锁前交作业增长变为1e8</button>
+            <button class="buttonupgrade inline-block" id="ku1">KU1"肌肉记忆"<br>1KP<br>购买项目5次获得的乘数由2变为3<br></button>
+            <button class="buttonupgrade inline-block" id="ku2">KU2"抄作业"<br>1KP<br>每次以990作业开始<br></button>
+            <button class="buttonupgrade inline-block" id="ku3">KU3"错题本"<br>1KP<br>所有项目获得基于KP的无上限乘数<br></button>
+            <button class="buttonupgrade inline-block" id="ku4">KU4"求情"<br>2KP<br>使学校解锁前交作业增长变为1e7<br></button>
             <br><br>
-            <button class="buttonupgrade inline-block" id="upgrade5">升级5"肌肉记忆2.0"<br>3KP<br>再让购买项目5次获得的乘数+1</button>
-            <button class="buttonupgrade inline-block" id="upgrade6">升级6"贿赂课代表"<br>5KP<br>以5次交作业开始</button>
-            <button class="buttonupgrade inline-block" id="upgrade7">升级7"错题本2.0"<br>8KP<br>获得双倍KP</button>
-            <button class="buttonupgrade inline-block" id="upgrade8">升级8"写检讨"<br>10KP<br>使学校解锁后交作业增长变为1e16</button>
+            <button class="buttonupgrade inline-block" id="ku5">KU5"肌肉记忆2.0"<br>3KP<br>再让购买项目5次获得的乘数+1</button>
+            <button class="buttonupgrade inline-block" id="ku6">KU6"贿赂课代表"<br>5KP<br>以5次交作业开始</button>
+            <button class="buttonupgrade inline-block" id="ku7">KU7"错题本2.0"<br>8KP<br>获得双倍KP</button>
+            <button class="buttonupgrade inline-block" id="ku8">KU8"求情2.0"<br>10KP<br>使学校解锁后交作业增长变为1e14</button>
             <br><br>
-            <button class="buttonupgrade inline-block" id="upgrade9">升级9"加倍努力"<br>15KP<br>交作业提供的乘数变为x20</button>
-            <button class="buttonupgrade inline-block" id="upgrade10">升级10"同桌互批"<br>20KP<br>基于你拥有的KP，每秒生产1/1000</button>
-            <button class="buttonupgrade inline-block" id="upgrade11">升级11"来点甜头"<br>3KP<br>提供x1000的乘数</button>
-            <button class="buttonupgrade inline-block" id="upgrade12">升级12"狂草糊弄学"<br>1e50KP<br>优化你获得KP的公式</button>
+            <button class="buttonupgrade inline-block" id="ku9">KU9"加倍努力"<br>15KP<br>交作业提供的乘数变为x20</button>
+            <button class="buttonupgrade inline-block" id="ku10">KU10"同桌互批"<br>20KP<br>基于你拥有的KP，每秒生产1/1000</button>
+            <button class="buttonupgrade inline-block" id="ku11">KU11"来点甜头"<br>20KP<br>提供x1000的乘数</button>
+            <button class="buttonupgrade inline-block" id="ku12">KU12"狂草糊弄学"<br>1e10KP<br>优化你获得KP的公式<br>log(HM)/70-->log(HM)/50</button>
         </div>
-        <div id="schoolgenerator+" class="page">
+        <div id="breakbrain+" class="page">
             <button class="schoolgenerator">学校生成器</button>
-            <br><br><br><br>
+            <br><br>
+            <div style="margin-left: 230px;" class="progress-container" id="scgrCD-container">
+                <div class="progress-bar" id="scgrCD"></div>
+            </div>
+            <br><br>
             <button class="buttonbuy2 inline-block" id="generatorup1">升级学校生成器的产量<br>当前 0.1个/次<br>1KP</button>
-            <button class="buttonbuy2 inline-block" id="generatorup2">生产学校生成器的速度<br>当前间隔 10s<br>100KP</button>
-            <button class="buttonbuy2 inline-block" id="generatorup3">升级学校生成器的乘数<br>当前 x1<br>1000学校</button>
+            <button style="margin-left: 295px;" class="buttonbuy2 inline-block" id="generatorup2">生产学校生成器的速度<br>当前间隔 10s<br>100KP</button>
+            <br><br><br><br>
+            <button class="buttonupgrade inline-block" id="bku1">BKU1"批发小商贩"<br>1e10KP<br>自动机最多可以一次购买10个项目</button>
+            <button class="buttonupgrade inline-block" id="bku2">BKU2"自交繁殖"<br>5e17KP<br>基于作业数量给作业部分乘数<br>当前:x1</button>
+            <button class="buttonupgrade inline-block" id="bku3">BKU3"交作业强化"<br>2e19KP<br>使交作业获得的乘数再x5</button>
+            <button class="buttonupgrade inline-block" id="bku4">BKU4"自习时间"<br>3e22KP<br>获得随时间增长的乘数<br>当前:x1</button>
+            <br><br>
+            <button class="buttonupgrade inline-block" id="bku5">BKU5《作业点点乐》<br>1e30KP<br>获得基于点击次数的乘数<br>当前:x1</button>
+            <button class="buttonupgrade inline-block" id="bku6">BKU6"还能糊弄?"<br>1e32KP<br>再次优化KP获得公式<br>log(HM)/50-->log(HM)/30</button>
+            <button class="buttonupgrade inline-block" id="bku7">BKU7"肥肉记忆(?)"<br>9e67KP<br>购买项目5次获得的乘数由4变为4.5</button>
+            <button class="buttonupgrade inline-block" id="bku8">BKU8"软上限(软上限)"<br>5e84KP<br>将作业阶段项目软上限削弱<br>1500次-->3000次</button>
+            <br><br>
+            <button class="buttonupgrade inline-block" id="bku9">BKU9"不许重置"<br>1e120KP<br>思维过载后不重置考试和自动机</button>
+            <button class="buttonupgrade inline-block" id="bku10">BKU10"不许重置2.0"<br>1e140KP<br>思维过载后不重置升级</button>
+            <button class="buttonupgrade inline-block" id="bku11">BKU11"人工选育"<br>1e150KP<br>强化"自交繁殖"</button>
+            <button class="buttonupgrade inline-block" id="bku12">BKU12"快速收购"<br>9e160KP<br>解锁学校生成器自动机</button>
+        </div>
+        <div id="mindupgrade+" class="page">
+            <button class="inline-block buttonmindupgrade" id="mu1">MU1"引力效应"<br>200MP<br>基于天体数量微弱增强超新星<br>当前x1</button>
+            <button class="inline-block buttonmindupgrade" id="mu2">MU2"化学极乐"<br>400MP<br>消除天体部分的削弱</button>
+            <button class="inline-block buttonmindupgrade" id="mu3">MU3"学而不思…"<br>600MP<br>略微优化获得MP的公式<br>log(KP)/18-->log(KP)/17.5</button>
+            <button class="inline-block buttonmindupgrade" id="mu4">MU4"思而不学…"<br>1000MP<br>基于KP数量倍增MP获得<br>当前x1</button>
+            <br><br><br>
+            <button class="inline-block buttonmindupgrade" id="mu5">MU5"思维溢出"<br>2e7MP<br>每秒自动获得10%可获得的MP</button>
+            <button class="inline-block buttonmindupgrade" id="mu6">MU6"线上提交"<br>1e7MP<br>交作业不重置作业阶段</button>
+            <button class="inline-block buttonmindupgrade" id="mu7">MU7"绕日轨道"<br>5e8MP<br>乘数生产额外乘恒星数量</button>
+            <button class="inline-block buttonmindupgrade" id="mu8">MU8"更多溢出"<br>3e17MP<br>强化MU5x10倍</button>
+            <br><br><br>
+            <button class="inline-block buttonmindupgrade" id="mu9">MU9"通货收缩"<br>1e70MP<br>清除学校生成器的软上限(思维过载1次生效)</button>
+            <button class="inline-block buttonmindupgrade" id="mu10">MU10"传奇改人王"<br>1e75MP<br>KP获取基于MP数量<br>当前:x1</button>
+            <button class="inline-block buttonmindupgrade" id="mu11">xxx</button>
+            <button class="inline-block buttonmindupgrade" id="mu12">xxx</button>
         </div>
         <div id="autobuy+" class="page">
             <p class="b" style="color: #747474;text-shadow:0px 0px 10px #747474;">自动机控制</p>
-            <p class="s" style="color: #747474;text-shadow:0px 0px 10px #747474;">在挑战9完成前，可能出现由于速度太快会出现判断不到1.78e308的情况，暂时无法解决，可以尝试关闭几个高阶项目的自动机</p>
+            <p class="s" style="color: #747474;text-shadow:0px 0px 10px #747474;"><s>在挑战9完成前，可能出现由于速度太快会出现判断不到1.78e308的情况，暂时无法解决，可以尝试关闭几个高阶项目的自动机</s>(修复了)</p>
+            <div style="background-color: #460f0f; border: #9e2f2f; border-style: solid; border-radius: 20px; padding: 10px 20px ; width: 800px;">
             <p class="inline-block m" id="auto1">签字笔自动机</p>
-            <button class="inline-block" id="switch1">  OFF  </button>
+            <button class="inline-block abswitch" id="switch1">  OFF  </button>
             <br>
             <p class="inline-block m" id="auto2">写作业机自动机</p>
-            <button class="inline-block" id="switch2">  OFF  </button>
+            <button class="inline-block abswitch" id="switch2">  OFF  </button>
             <br>
             <p class="inline-block m" id="auto3">文具盒自动机</p>
-            <button class="inline-block" id="switch3">  OFF  </button>
+            <button class="inline-block abswitch" id="switch3">  OFF  </button>
             <br>
             <p class="inline-block m" id="auto4">电子白板自动机</p>
-            <button class="inline-block" id="switch4">  OFF  </button>
+            <button class="inline-block abswitch" id="switch4">  OFF  </button>
             <br>
             <p class="inline-block m" id="auto5">班级自动机</p>
-            <button class="inline-block" id="switch5">  OFF  </button>
+            <button class="inline-block abswitch" id="switch5">  OFF  </button>
             <br>
             <p class="inline-block m" id="auto6">学校自动机</p>
-            <button class="inline-block" id="switch6">  OFF  </button>
+            <button class="inline-block abswitch" id="switch6">  OFF  </button>
             <br>
             <p class="inline-block m" id="auto7">交作业自动机</p>
-            <button class="inline-block" id="switch7">  OFF  </button>
+            <button class="inline-block abswitch" id="switch7">  OFF  </button>
             <br>
             <p class="inline-block m" id="auto8">脑容量爆炸自动机</p>
-            <button class="inline-block" id="switch8">  OFF  </button>
-            <input class="inline-block" style="height: 40px; width:600px;" id="braindownlimit" placeholder="可获得的KP超过此值则脑容量爆炸，请输入科学计数法(aeb)或是普通数值"></input>
+            <button class="inline-block abswitch" id="switch8">  OFF  </button>
             <br>
+            <input style="height: 40px; width:400px;" id="braindownlimit" placeholder="可获得的KP超过此值则脑容量爆炸，科学计数法或常规数值"></input>
+            </div>
+            <br>
+            <div style="background-color: #0f460f; border: #2f9e47; border-style: solid; border-radius: 20px; padding: 10px 20px; width: 800px;">
+                <p class="inline-block m" id="auto9">学校生成器自动机</p>
+                <button class="inline-block abswitch" id="switch9">  OFF  </button>
+                <br>
+            </div>
+            <br>
+            <div style="background-color: #46290f; border: #9e4e2f; border-style: solid; border-radius: 20px; padding: 10px 20px; width: 800px;">
+                <p class="inline-block m" id="auto10">行星自动机</p>
+                <button class="inline-block abswitch" id="switch10">  OFF  </button>
+                <br>
+                <p class="inline-block m" id="auto11">恒星自动机</p>
+                <button class="inline-block abswitch" id="switch11">  OFF  </button>
+                <br>
+                <p class="inline-block m" id="auto12">星云自动机</p>
+                <button class="inline-block abswitch" id="switch12">  OFF  </button>
+                <br>
+                <p class="inline-block m" id="auto13">星系自动机</p>
+                <button class="inline-block abswitch" id="switch13">  OFF  </button>
+                <br>
+                <p class="inline-block m" id="auto14">超星系团自动机</p>
+                <button class="inline-block abswitch" id="switch14">  OFF  </button>
+                <br>
+                <p class="inline-block m" id="auto15">超新星自动机</p>
+                <button class="inline-block abswitch" id="switch15">  OFF  </button>
+                <br>
+                <p class="inline-block m" id="auto16">中子星自动机</p>
+                <button class="inline-block abswitch" id="switch16">  OFF  </button>
+            </div>
         </div>
         <div id="challenge+" class="page">
-            <p class="b" style="color: #ebe852">普通挑战</p>
+            <p class="b inline-block" style="color: #ebe852">普通挑战</p>
+            <button class="inline-block" id="resetchallenge">点我重置普通挑战(挑战9除外)</button>
+            <br>
             <button class="buttonchallenge inline-block" id="challenge1">挑战1 忘记带笔<br>禁止购买签字笔，文具盒生产速度^0.25<br>解锁签字笔自动机</button>
             <button class="buttonchallenge inline-block" id="challenge2">挑战2 自愿作业<br>交作业不提供任何乘数，不受升级影响<br>解锁写作业机自动机</button>
             <button class="buttonchallenge inline-block" id="challenge3">挑战3 请了个假<br>学校不生产任何东西<br>解锁文具盒自动机</button>
@@ -509,6 +713,24 @@
             <button class="buttonchallenge inline-block" id="challenge8">挑战8 头脑风暴<br>脑容量爆炸需求变为1e600<br>解锁脑容量爆炸自动机</button>
             <br><br><br><br><br>
             <button class="buttonchallenge inline-block" style="margin-left: 480px;" id="challenge9">挑战9 突破极限<br>在1s内达到脑容量爆炸<br>解锁突破大脑极限，项目价格增加</button>
+            <br><br>
+        </div>
+        <div id="challenge2+" class="page">
+            <p class="b inline-block" style="color: #ca812d">思维挑战</p>
+            <button class="inline-block" id="resetchallenge2">点我重置思维挑战</button>
+            <br>
+            <p class="s orange">将以1e30KP开始</p>
+            <br><br>
+            <button class="buttonchallenge inline-block" id="challenge21">思维挑战MC1<br>全部生产速度^0.5<br>目标:7e317HM<br>解锁行星自动机+中子星效果翻倍</button>
+            <button class="buttonchallenge inline-block" id="challenge22">思维挑战MC2<br>每秒对作业量^0.5<br>目标:1e230KP<br>解锁恒星自动机</button>
+            <button class="buttonchallenge inline-block" id="challenge23">思维挑战MC3<br>学校,班级均不进行生产<br>目标:5e1049HM<br>解锁星云自动机+优化MP获取公式<br>log(KP)/17.5-->log(KP)/16</button>
+            <button class="buttonchallenge inline-block" id="challenge24">思维挑战MC4<br>进入后清空乘数,乘数生产^0.25<br>目标:2e226KP<br>解锁星系自动机</button>
+            <br><br><br><br><br>
+            <button class="buttonchallenge inline-block" id="challenge25">思维挑战MC5<br>目标1e300KP<br>除最后一次购买的项目,其他项目生产速度均^0.25<br>解锁超星系团自动机+KP增益公式更好<br>^0.25-->^0.35</button>
+            <button class="buttonchallenge inline-block" id="challenge26">思维挑战MC6<br>禁用作业部分自动购买器<br>目标:1e9950HM<br>解锁超新星自动机+优化KP获取公式<br>log(HM)/30-->log(HM)/27</button>
+            <button class="buttonchallenge inline-block" id="challenge27">思维挑战MC7<br>购买更高等级的项目会清除更低1级的项目<br>目标:1e10000HM<br>解锁中子星自动机</button>
+            <button class="buttonchallenge inline-block" id="challenge28">思维挑战MC8<br>不获得来自KP的乘数,交作业不提供乘数<br>目标:3e273KP<br>强化MU4<br></button>
+            <br><br><br><br><br>
         </div>
         <div id="Achievements+" class="page">
             <p style="color: #cc45c5;text-shadow:0px 0px 10px #cc45c5;" class="b">成就</p>
@@ -569,6 +791,40 @@
             </button>
             <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac17.png);" id="ac18">
                 <scan class="tips-text">废寝忘食<br>游玩时间超过5小时(讲真，有这么好玩吗?)</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac18.png);" id="ac19">
+                <scan class="tips-text">饮鸠止渴<br>在作业总数超过1e1000时手动写作业</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac19.png);" id="ac20">
+                <scan class="tips-text">别急,我在烧烤<br>解锁「思维」</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac20.png);" id="ac21">
+                <scan class="tips-text">硬刚削弱<br>在挑战1中,拥有超过1e100支签字笔</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac21.png);" id="ac22">
+                <scan class="tips-text">三"日"凌空<br>在天体阶段拥有至少三个恒星(三星手机不要看此成就)</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac22.png);" id="ac23">
+                <scan class="tips-text">手撕挑战<br>在普通挑战5中拥有超过1e4350的作业</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac23.png);" id="ac24">
+                <scan class="tips-text">更进一步<br>购买一个思维升级</scan>
+            </button>
+            <br><br>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac24.png);" id="ac25">
+                <scan class="tips-text">又来?<br>通过一个思维挑战</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac25.png);" id="ac26">
+                <scan class="tips-text">学会耐心<br>通过MC5</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac26.png);" id="ac27">
+                <scan class="tips-text">统治宇宙<br>拥有超过1e20个行星</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac27.png);" id="ac28">
+                <scan class="tips-text">典型的土豆型思维<br>获得超过"1土豆"(1e29)的思维</scan>
+            </button>
+            <button disabled class="tips achievements inline-block" style="background-image: url(images/Achievements/ac28.png);" id="ac29">
+                <scan class="tips-text">你不需要它<br>在没有通过学校生成器生产学校的情况下获得1e450KP</scan>
             </button>
         </div>
         <div id="statics" class="page">
@@ -642,7 +898,7 @@
             优化页面内容，加入了些漂亮的特效<br>
             移除了wanjia114<br>
             <br><br>
-            1.04日志-2025.23<br>
+            1.04日志-2025.3.23<br>
             添加了本地存储，也许再也不需要用调base64改存档了<br>
             修复了已知的bug，比如升级11没有效果<br>
             适当修改了侧边栏，感觉有点怪，我在这里表达1.79e308个抱歉<br>
@@ -652,11 +908,28 @@
             加入统计面板<br>
             做了很多(准确来说，是18个)成就!<br>
             移除了wanjia114<br>
+            <br><br>
+            1.05日志-2025.23<br>
+            <p class="m red">旧存档无法使用!请在作者页面打开作者b站账号寻找本版本(第四期)相关视频解决!</p>
+            新增了打破大脑极限的部分内容,包括<br>
+            ┠──突破大脑极限升级(BKU)<br>
+            ┗──新的学校生成器<br>
+            将思维部分制作完成,包括<br>
+            ┠──思维升级<br>
+            ┠──思维挑战<br>
+            ┗──天体生产<br>
+            修复了已知的bug<br>
+            加入了游戏内提示<br>
+            制作了购买全部(buymax)功能<br>
+            重写了学校生成器的功能<br>
+            优化了自动机的页面<br>
+            移除了wanjia114<br>
     </div>
+    <div class="news" id="news">aaa</div>
+    <div class="downbar" id="points">aaa</div>
         <br><br>
         <p>版本号1.04<br>使用了break_eternity.js</p>
     <!-- 显示区域 -->
-    
     <div id="helpwindow" class="popup">
         <div class="popup-content">
             <span id="closeButton" class="close">&times;</span>
@@ -666,6 +939,9 @@
             <p>简单解释下一些计数法:AeB=A×10^B(常规科学计数法),eeA=10^(10^e)</p>
             <p>游戏简写:HM(作业),KP(知识)</p>
             <p>玩的开心哦~</p>
+            <p>B 脑容量爆炸</p>
+            <p>M 思维过载</p>
+            <p>S 保存本地</p>
         </div>
     </div>
     <div id="tips" class="p1p">
