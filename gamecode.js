@@ -1356,7 +1356,7 @@ setInterval(function(){//按钮
     document.getElementById("scgrCD-container").style.backgroundColor = "#115308"
     document.getElementById("scgrCD-container").style.borderColor = "#0d4905"
     document.getElementById("scgrCD").style.backgroundColor = "#3bbd2a"
-    if (product[0].gte(reset[0][1]) && (reset[0][0].lte(5) || (inchallenge !== 2 && inchallenge === 28))){
+    if (product[0].gte(reset[0][1]) && (reset[0][0].lte(4) || (inchallenge !== 2 && inchallenge !== 28))){
         resetbutton[0].disabled = false
         resetbutton[0].style.color ="#ffffff"
         resetbutton[0].style.textShadow = "0px 0px 8px #ffffff"
