@@ -247,7 +247,7 @@ function MapToDecimal(arr) {
     });
 }
 function read(a,b){
-    if (b !== undefined){
+    if (b !== undefined && b !== null){
         if (a.length>b.length){
             for (i=0;i<b.length;i++){
                 a[i] = b[i]
@@ -1213,7 +1213,6 @@ brainstorm.addEventListener("click", function(){
         challenge[0][inchallenge-1] = 1
     }
     storm()
-    statics[1] = statics[1].add(dec("1"))
 })
 }
 document.getElementById("focus").addEventListener("click", function(){
@@ -1231,7 +1230,7 @@ document.addEventListener('keydown', function(event) {
         }
     }
     if(event.key === 'b'){
-        if (brainstorm.disabled === false){
+        if (willget[1].gt(0) || product[0].gt(Maxnum)){
             if (inchallenge !== 0){
                 challenge[0][inchallenge-1] = 1
             }
@@ -2807,7 +2806,7 @@ save.addEventListener("click", function(){
 })
 
 let inputField = document.getElementById("inputField");
-let loadsave
+let loadsave = []
 setInterval(function(){
     if( inputField.value !== '' ){
         loadsave = JSON.parse(atob(atob(inputField.value)))
@@ -2857,7 +2856,10 @@ loadfromLocal.addEventListener("click",function(){
 })
 }
 const Localthings = JSON.parse(localStorage.getItem("file"))
-loadthings(Localthings)
+if (localStorage.getItem("file") !== null){
+    loadthings(Localthings)
+}
+
 if ( version !== 1.061 ){
     newson("你的存档是旧版本的,建议去找到最新的更新日志查看是否有问题!")
 }else if (new Date().getTime()-thepasttime.getTime()>5000){
