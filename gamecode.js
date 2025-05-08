@@ -976,27 +976,31 @@ document.getElementById("resetTree").addEventListener("click",function(){
     resetTree = !resetTree
 })
 document.getElementById("charge1").addEventListener("click",function(){
-    if (achievements[33]){
-        if (Balancer.KP[3] === Zero){
-            Balancer.KP[3] = dec(1)
+    if (product[1].gt(1)){
+        if (achievements[33]){
+            if (Balancer.KP[3] === Zero){
+                Balancer.KP[3] = dec(1)
+            }else{
+                Balancer.KP[3] = Zero
+            }
         }else{
-            Balancer.KP[3] = Zero
+            Balancer.KP[1] = Balancer.KP[1].add(product[1].pow(0.02+0.005*IS[12]))
+            product[1] = product[1].sub(product[1].pow(0.02+0.005*IS[12]))
         }
-    }else{
-        Balancer.KP[1] = Balancer.KP[1].add(product[1].pow(0.02+0.005*IS[12]))
-        product[1] = product[1].sub(product[1].pow(0.02+0.005*IS[12]))
     }
 })
 document.getElementById("charge2").addEventListener("click",function(){
-    if (achievements[33]){
-        if (Balancer.MP[3] === Zero){
-            Balancer.MP[3] = dec(1)
+    if (product[2].gt(1)){
+        if (achievements[33]){
+            if (Balancer.MP[3] === Zero){
+                Balancer.MP[3] = dec(1)
+            }else{
+                Balancer.MP[3] = Zero
+            }
         }else{
-            Balancer.MP[3] = Zero
+            Balancer.MP[1] = Balancer.MP[1].add(product[2].pow(0.02+0.005*IS[12]))
+            product[2] = product[2].sub(product[2].pow(0.02+0.005*IS[12]))
         }
-    }else{
-        Balancer.MP[1] = Balancer.MP[1].add(product[2].pow(0.02+0.005*IS[12]))
-        product[2] = product[2].sub(product[2].pow(0.02+0.005*IS[12]))
     }
 })
 document.getElementById("UPbalancer").addEventListener("click",function(){
@@ -1149,7 +1153,7 @@ for(let i=0;i<=8;i++){
         switchPage("homework+")
         inchallenge = i+1
         if (i === 8){
-            producttime = 2500
+            producttime = 5000
         }
         if (i === 0){
             thing[0][2] = dec("1")
@@ -1571,11 +1575,11 @@ setInterval(function() {//生产
             willget[3] = celestias[0][2].mul(celestias[0][3]).mul(20).mul(celestias[1][2].mul(mu[6]).add(1)).mul(mdadder)
         }
     }
-    if (Balancer.KP[3].eq(1) && product[2].gt(10)){
+    if (Balancer.KP[3].eq(1) && product[1].gt(1)){
         Balancer.KP[1] = Balancer.KP[1].add(product[1].pow(0.02+0.005*IS[12]))
         product[1] = product[1].sub(product[1].pow(0.02+0.005*IS[12]))
     }
-    if (Balancer.MP[3].eq(1) && product[2].gt(10)){
+    if (Balancer.MP[3].eq(1) && product[2].gt(1)){
         Balancer.MP[1] = Balancer.MP[1].add(product[2].pow(0.02+0.005*IS[12]))
         product[2] = product[2].sub(product[2].pow(0.02+0.005*IS[12]))
     }
