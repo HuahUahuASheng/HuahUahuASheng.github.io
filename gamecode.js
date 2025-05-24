@@ -750,8 +750,8 @@ setInterval(function(){
                     }
                 }
             }
-            if (product[1].gte("1e600")){
-                willget[4] = dec(10).pow((product[1].div("1e600")).log(10).div(100)).mul(statics[4])
+            if (product[1].gte("1e600") || willget[4].gt(0)){
+                willget[4] = dec(10).pow((product[1].div("1e600")).log(10).div(100)).mul(statics[4].add(1))
             }else{
                 willget[4] = Zero
             }
@@ -1848,7 +1848,7 @@ setInterval(function() {//显示
         document.getElementById("insideMul2").innerHTML = `^${fixNum(Balancer.MP[1].add(1).log(10).div(12).add(1))}>>知识充能效果`
     }
     if (thePage === 'challenge3+'){
-        document.getElementById("challenge33").innerHTML = `<span style="color:#000b3a;text-shadow:none;font-size:20px;">灵感挑战IC3"知识不足"</span><br><br>清除KU,BKU升级,并且在本次挑战中无法重新购买<br><br>目标:5e50KP<br><br>奖励:灵感爆发和思维过载不重置学校生成器,灵感获取的量基于灵感爆发次数增加<br>当前:x${statics[4]}`
+        document.getElementById("challenge33").innerHTML = `<span style="color:#000b3a;text-shadow:none;font-size:20px;">灵感挑战IC3"知识不足"</span><br><br>清除KU,BKU升级,并且在本次挑战中无法重新购买<br><br>目标:5e50KP<br><br>奖励:灵感爆发和思维过载不重置学校生成器,灵感获取的量基于灵感爆发次数增加<br>当前:x${statics[4].add(1)}`
     }
     shownum(statics[0],document.getElementById("statics1"),'总共进行过 ',' 次交作业')
     shownum(statics[1],document.getElementById("statics2"),'总共进行过 ',' 次脑容量爆炸')
