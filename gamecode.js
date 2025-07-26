@@ -1714,10 +1714,10 @@ setInterval(function() {//显示
         }
         if (unlock[0]===0){
             if (product[0].neq(Zero)){
-                progress.textContent = ("距离 脑容量爆炸 还有 "+(product[0].log(10).div(Maxnum.log(10))).mul(100).toFixed(7)+"%")
+                progress.textContent = ("脑容量爆炸 进度已完成 "+(product[0].log(10).div(Maxnum.log(10))).mul(100).toFixed(7)+"%")
                 document.getElementById("progress-bar").style.width = (product[0].log(10).div(Maxnum.log(10))).mul("100").toNumber()+'0%'
             }else{
-                progress.textContent = ("距离 脑容量爆炸 还有 "+0+"%")
+                progress.textContent = ("脑容量爆炸 进度已完成 "+0+"%")
                 document.getElementById("progress-bar").style.width ='0%'
             }
         }else{
@@ -1725,10 +1725,10 @@ setInterval(function() {//显示
             document.getElementById("progress-container").style.borderColor = "#0d4905"
             document.getElementById("progress-bar").style.backgroundColor = "#3bbd2a"
             if (product[1].neq(Zero)){
-                progress.textContent = ("距离 灵感爆发 还有 "+(product[1].log(10).div(dec("1e600").log(10))).mul(100).toFixed(7)+"%")
+                progress.textContent = ("灵感爆发 进度已完成 "+(product[1].log(10).div(dec("1e600").log(10))).mul(100).toFixed(7)+"%")
                 document.getElementById("progress-bar").style.width = (product[1].log(10).div(dec("1e600").log(10))).mul(100)+'%'
             }else{
-                progress.textContent = ("距离 灵感爆发 还有 "+0+"%")
+                progress.textContent = ("灵感爆发 进度已完成 "+0+"%")
                 document.getElementById("progress-bar").style.width ='0%'
             }
         }
