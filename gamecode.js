@@ -1276,6 +1276,14 @@ document.addEventListener('keydown', function(event) {
         },2100)
     }
 })
+document.getElementById("fixPT").addEventListener("click",()=>{
+    if(window.confirm("这会重置你的PT和灵感研究!点击确认继续")){
+        PT = [Zero,Zero]//总-剩
+        PTprice = [dec("1e600"),dec("1"),dec("1e100")]
+        IS = [0,0,  0,0,0,0,  0,0, 0,0,0, 0,0,0, 0,0]
+        newson("awa真不好意思,加了这个按钮补救一下")
+    }
+})
 document.addEventListener('click', function() {
     statics[2] = statics[2].add(dec("1"))
 })
